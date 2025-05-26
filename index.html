@@ -74,6 +74,15 @@ cursor: pointer;
 <body class="bg-white">
 
 <!-- Header -->
+<style>
+  .active-link {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+    color: #facc15; /* amarillo (Tailwind: yellow-400) */
+  }
+</style>
+
 <!-- Header -->
 <header class="bg-black shadow-md">
   <div class="container mx-auto px-4 sm:px-6 lg:px-16 py-4 flex items-center justify-between">
@@ -89,27 +98,33 @@ cursor: pointer;
 
     <!-- Navegación -->
     <nav id="menu" class="hidden sm:flex space-x-6">
-      <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300">Inicio</a>
-      <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
-      <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
+      <a href="https://lacasadelaspuertas.github.io/Inicio/"
+         class="text-white hover:text-gray-300 active-link">Inicio</a>
+      <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/"
+         class="text-white hover:text-gray-300">Puertas</a>
+      <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/"
+         class="text-white hover:text-gray-300">Cerraduras</a>
     </nav>
   </div>
 
   <!-- Menú móvil -->
   <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
-    <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300">Inicio</a>
-    <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
-    <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
+    <a href="https://lacasadelaspuertas.github.io/Inicio/"
+       class="block text-white py-2 hover:text-gray-300 active-link">Inicio</a>
+    <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/"
+       class="block text-white py-2 hover:text-gray-300">Puertas</a>
+    <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/"
+       class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
   </div>
 
   <script>
-    // Script para mostrar/ocultar el menú móvil
     document.getElementById('menu-toggle').addEventListener('click', function () {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     });
   </script>
 </header>
+
 
 
 
