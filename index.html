@@ -141,14 +141,6 @@
 </section>
 
 <!-- Nuestros Productos -->
-<section id="productos" class="py-16 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestros Productos</h2>
-      <p class="text-gray-600 max-w-3xl mx-auto">Explora nuestra línea de puertas y cerraduras de alta calidad para el hogar y negocio.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Productos aquí (omitido por brevedad) -->
       <!-- Nuestros Productos -->
 <section id="productos" class="py-16 bg-gray-50">
 
@@ -193,10 +185,6 @@
   </div>
 </section>
 
-      
-    </div>
-  </div>
-</section>
 
 <div class="py-2 text-center bg-gray-50">
   <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
@@ -311,7 +299,98 @@
     }
   });
 </script>
+<!-- Sección CTA mejorada -->
 
+<section class="bg-gradient-to-r from-[#13262F] to-[#1f3b45] text-white py-16 px-6 text-center">
+  <h2 class="text-4xl font-bold mb-4">¿Buscas transformar tu espacio?</h2>
+  <p class="text-xl mb-8">Contactanos y empecemos a crear algo único juntos.</p>
+<a href="https://wa.me/51948660856?text=Hola%2C+quiero+más+información+sobre+sus+productos" 
+   target="_blank" 
+   class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
+  <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
+</a>
+
+</section>
+
+
+<!-- Fin sección CTA mejorada -->
+
+<!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12 mt-12">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div>
+        <h3 class="text-xl font-bold mb-4 border-b border-white pb-2">Información de Contacto</h3>
+        <p class="flex items-start mb-3">
+          <i class="ri-map-pin-line text-white mr-2 mt-1"></i>
+          Av. Tingo María 1338, Breña, Lima, Perú
+        </p>
+        <p class="flex items-start">
+          <i class="ri-phone-line text-white mr-2 mt-1"></i>
+          +51 948 660 856
+        </p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4 border-b border-white pb-2">Horarios de Atención</h3>
+        <p class="flex items-start mb-1">
+          <i class="ri-time-line text-white mr-2 mt-1"></i>
+          Lunes a Viernes: 7:00 AM - 5:00 PM
+        </p>
+        <p class="flex items-start mb-1">
+          <i class="ri-time-line text-white mr-2 mt-1"></i>
+          Sábados: 7:00 AM - 1:00 PM
+        </p>
+        <p class="flex items-start mb-3">
+          <i class="ri-time-line text-white mr-2 mt-1"></i>
+          Domingos: Cerrado
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
+      <p>© 2025 La Casa de las Puertas. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+  function openLightbox(element) {
+    const img = element.querySelector('img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+    event.stopPropagation();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function (e) {
+    if (e.target === this) closeLightbox();
+  });
+</script>
 </body>
 </html>
 
