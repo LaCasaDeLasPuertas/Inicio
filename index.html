@@ -1,215 +1,273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Casa de las Puertas</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B4513',
+            secondary: '#D2B48C'
+          },
+          borderRadius: {
+            'none': '0px',
+            'sm': '4px',
+            DEFAULT: '8px',
+            'md': '12px',
+            'lg': '16px',
+            'xl': '20px',
+            '2xl': '24px',
+            '3xl': '32px',
+            'full': '9999px',
+            'button': '8px'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
-    header {
-      background-color: #4a2c1d;
-      color: white;
-      padding: 15px;
-      text-align: center;
+    .gallery-item:hover .overlay {
+      opacity: 1;
     }
-    .hero {
-      background-image: url(bosque);
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding: 100px 20px;
+    .active-link {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+      color: #facc15;
     }
-    .hero h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-    }
-    .btn-wsp {
-      display: inline-flex;
-      align-items: center;
-      background-color: #25d366;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 30px;
-      font-size: 16px;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-    .btn-wsp i {
-      margin-right: 8px;
-    }
-    .btn-wsp:hover {
-      background-color: #1ebc59;
-    }
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .producto {
-      background-color: #f5f5f5;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .producto i {
-      font-size: 30px;
-      margin-bottom: 10px;
-      color: #4a2c1d;
-    }
-    .producto h3 {
-      margin: 10px 0 5px;
-    }
-    .btn-vermas {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 18px;
-      background-color: #4a2c1d;
-      color: white;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn-vermas:hover {
-      background-color: #603a29;
-    }
-    .clientes {
-      display: flex;
-      flex-wrap: wrap;
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
       justify-content: center;
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
+      align-items: center;
     }
-    .cliente {
-      background-color: #fff8f3;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      flex: 1 1 250px;
+    .lightbox.active {
+      display: flex;
     }
-    .cta-final {
-      background-color: #fbe9e7;
-      padding: 40px 20px;
-      text-align: center;
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
     }
-    .cta-final h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    footer {
-      background-color: #4a2c1d;
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
       color: white;
-      text-align: center;
-      padding: 15px;
-    }
-    .separador {
-      margin: 40px 0 20px;
+      font-size: 30px;
+      cursor: pointer;
     }
   </style>
 </head>
-<body>
+<body class="bg-white">
 
-  <header>
-    <h1>La Casa de las Puertas</h1>
-  </header>
-
-  <div class="hero">
-    <h1>¡Transforma tu hogar con estilo!</h1>
-    <p>Descubre nuestras puertas de calidad superior y diseño elegante.</p>
-    <a href="https://wa.me/5491133445566" class="btn-wsp"><i class="fab fa-whatsapp"></i> Consultar</a>
+<!-- Header -->
+<header class="bg-gray-900 shadow-md">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-16 py-4 flex items-center justify-between">
+    <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
+    <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <nav id="menu" class="hidden sm:flex space-x-6">
+      <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300 active-link">Inicio</a>
+      <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
+      <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
+    </nav>
   </div>
+  <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
+    <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300 active-link">Inicio</a>
+    <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
+    <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
+  </div>
+</header>
 
-  <section>
-    <a href="https://wa.me/5491133445566" class="btn-wsp"><i class="fab fa-whatsapp"></i> Consultar</a>
-    <div class="separador"></div>
-    <h2>Nuestros Productos</h2>
-    <div class="productos">
-      <div class="producto">
-        <i class="fas fa-door-open"></i>
-        <h3>Puerta Clásica</h3>
-        <p>Diseño tradicional y elegante.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function () {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+<!-- Hero -->
+<section class="relative">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('madera');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  </div>
+  <div class="container mx-auto px-16 py-20 md:py-32 relative">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Puertas y Cerraduras de Calidad Superior</h1>
+      <p class="text-xl text-white mb-8">Transformamos espacios con puertas elegantes y cerraduras seguras. Más de 30 años de experiencia en el mercado peruano y más de 200 puertas entregadas este 2025.</p>
+      <a href="https://wa.me/51948660856?text=¡Hola!%20quiero%20mas%20información" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 !rounded-button inline-flex items-center gap-2">
+        <i class="ri-whatsapp-line"></i> Consultar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Nuestros Productos -->
+<section id="productos" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestros Productos</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">Explora nuestra línea de puertas y cerraduras de alta calidad para el hogar y negocio.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-door-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Puertas de Madera</h3>
+        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=madera" class="mt-4 text-primary underline">Ver más</a>
       </div>
-      <div class="producto">
-        <i class="fas fa-door-closed"></i>
-        <h3>Puerta Moderna</h3>
-        <p>Estilo contemporáneo para interiores.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-door-open-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Puertas Contraplacadas</h3>
+        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=contraplacadas" class="mt-4 text-primary underline">Ver más</a>
       </div>
-      <div class="producto">
-        <i class="fas fa-warehouse"></i>
-        <h3>Puerta Doble</h3>
-        <p>Ideal para entradas amplias.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-home-gear-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Portones de Garaje</h3>
+        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=porton" class="mt-4 text-primary underline">Ver más</a>
       </div>
-      <div class="producto">
-        <i class="fas fa-lock"></i>
-        <h3>Puerta Blindada</h3>
-        <p>Máxima seguridad para tu hogar.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-lock-2-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Cerraduras para Entradas</h3>
+        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/?filtro=entrada" class="mt-4 text-primary underline">Ver más</a>
       </div>
-      <div class="producto">
-        <i class="fas fa-home"></i>
-        <h3>Puerta Interior</h3>
-        <p>Perfecta para dividir ambientes.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-lock-unlock-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Cerraduras para Interiores</h3>
+        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/?filtro=interior" class="mt-4 text-primary underline">Ver más</a>
       </div>
-      <div class="producto">
-        <i class="fas fa-tree"></i>
-        <h3>Puerta Rústica</h3>
-        <p>Acabado natural y acogedor.</p>
-        <a class="btn-vermas" href="#">Ver más</a>
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow">
+        <i class="ri-smartphone-line text-5xl text-primary mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-800">Cerraduras Digitales</h3>
+        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/?filtro=digital" class="mt-4 text-primary underline">Ver más</a>
       </div>
     </div>
-    <div class="separador"></div>
-    <a href="https://wa.me/5491133445566" class="btn-wsp"><i class="fab fa-whatsapp"></i> Consultar</a>
-  </section>
+  </div>
+</section>
 
-  <section style="background-color: #fff5f0;">
-    <h2>Lo que dicen nuestros clientes</h2>
-    <div class="clientes">
-      <div class="cliente">
-        <p>“Excelente atención y productos de calidad. ¡Recomendadísimos!”</p>
-        <strong>- Marta L.</strong>
-      </div>
-      <div class="cliente">
-        <p>“Las puertas llegaron en tiempo y forma. Muy buena experiencia.”</p>
-        <strong>- Carlos P.</strong>
-      </div>
-      <div class="cliente">
-        <p>“Muy buena calidad y excelente asesoramiento en todo momento.”</p>
-        <strong>- Juliana R.</strong>
+<!-- Comentarios -->
+<section id="comentarios" class="bg-white py-16">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-800">Lo que dicen nuestros clientes</h2>
+      <p class="text-gray-600">Reseñas reales de personas que confiaron en nosotros</p>
+    </div>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide bg-gray-100 rounded-lg shadow text-center px-4 py-6 max-w-sm mx-auto">
+          <p class="text-gray-700 italic">"Excelente atención y productos de calidad. Mi puerta se ve espectacular."</p>
+          <div class="text-yellow-400 text-xl mt-2">★★★★★</div>
+          <p class="mt-2 text-sm font-medium text-gray-800">- Ana R.</p>
+        </div>
+        <div class="swiper-slide bg-gray-100 rounded-lg shadow text-center px-4 py-6 max-w-sm mx-auto">
+          <p class="text-gray-700 italic">"Las cerraduras digitales funcionan perfecto. Recomendados 100%."</p>
+          <div class="text-yellow-400 text-xl mt-2">★★★★☆</div>
+          <p class="mt-2 text-sm font-medium text-gray-800">- José M.</p>
+        </div>
+        <div class="swiper-slide bg-gray-100 rounded-lg shadow text-center px-4 py-6 max-w-sm mx-auto">
+          <p class="text-gray-700 italic">"Instalaron todo rápido y sin complicaciones. Muy contento con el resultado."</p>
+          <div class="text-yellow-400 text-xl mt-2">★★★★★</div>
+          <p class="mt-2 text-sm font-medium text-gray-800">- Luis G.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta-final">
-    <h2>¿Listo para renovar tu hogar?</h2>
-    <p>Contáctanos ahora por WhatsApp y encontrá la puerta ideal para tu espacio.</p>
-    <a href="https://wa.me/5491133445566" class="btn-wsp"><i class="fab fa-whatsapp"></i> Consultar</a>
-  </section>
+<!-- Footer -->
+<footer id="contacto" class="bg-gray-900 text-white py-12 w-full">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10">
+      <div>
+        <h3 class="text-xl font-bold mb-4 border-b border-primary pb-2">Información de Contacto</h3>
+        <p class="flex items-start mb-3"><i class="ri-map-pin-line text-primary mr-2 mt-1"></i>Av. Tingo María 1338, Breña, Lima, Perú</p>
+        <p class="flex items-start"><i class="ri-phone-line text-primary mr-2 mt-1"></i>+51 948 660 856</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4 border-b border-primary pb-2">Horarios de Atención</h3>
+        <p class="flex items-start mb-1"><i class="ri-time-line text-primary mr-2 mt-1"></i>Lunes a Viernes: 7:00 AM - 5:00 PM</p>
+        <p class="flex items-start mb-1"><i class="ri-time-line text-primary mr-2 mt-1"></i>Sábados: 7:00 AM - 1:00 PM</p>
+        <p class="flex items-start mb-3"><i class="ri-time-line text-primary mr-2 mt-1"></i>Domingos: Cerrado</p>
+        <p class="text-sm text-gray-400">Atención personalizada y presupuestos sin compromiso.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
+      <p>© 2025 La Casa de las Puertas. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
 
-  <footer>
-    <p>© 2025 La Casa de las Puertas. Todos los derechos reservados.</p>
-  </footer>
+<!-- Botones flotantes -->
+<div class="fixed bottom-6 right-6 flex flex-col space-y-4 z-50">
+  <a href="https://www.facebook.com/lacasadelaspuertaslima/?locale=es_LA" target="_blank" class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors">
+    <i class="ri-facebook-fill ri-lg text-white"></i>
+  </a>
+  <a href="https://wa.me/51948660856?text=¡Hola!%20quiero%20mas%20información" target="_blank" class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors">
+    <i class="ri-whatsapp-fill ri-lg text-white"></i>
+  </a>
+</div>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+  function openLightbox(element) {
+    const img = element.querySelector('img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+    event.stopPropagation();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function (e) {
+    if (e.target === this) closeLightbox();
+  });
+</script>
 </body>
 </html>
-
