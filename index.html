@@ -35,41 +35,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
   <style>
-
-   <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 20,
-    centeredSlides: true,
-    speed: 800,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      }
-    }
-  });
-</script>
- 
     body {
       font-family: 'Montserrat', sans-serif;
     }
@@ -109,56 +75,50 @@
       font-size: 30px;
       cursor: pointer;
     }
+    .swiper-button-next, .swiper-button-prev {
+      color: #8B4513;
+      z-index: 10;
+    }
   </style>
 </head>
 <body class="bg-white">
 
 <!-- Header -->
-  <!-- Header -->
-   <header class="bg-gray-900 shadow-md">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-16 py-4 flex items-center justify-between">
-      <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
-      <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-          viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      <nav id="menu" class="hidden sm:flex space-x-6">
-        <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300">Inicio</a>
-        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
-        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
-      </nav>
-    </div>
-    <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
-      <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300">Inicio</a>
-      <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
-      <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
-    </div>
-    <script>
-      document.getElementById('menu-toggle').addEventListener('click', function () {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      });
-      const currentUrl = window.location.href;
-      document.querySelectorAll('a').forEach(link => {
-        if (link.href === currentUrl) {
-          link.classList.add('active-link');
-        }
-      });
-    </script>
-  </header>
+<header class="bg-gray-900 shadow-md z-50 relative">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-16 py-4 flex items-center justify-between">
+    <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
+    <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <nav id="menu" class="hidden sm:flex space-x-6">
+      <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300">Inicio</a>
+      <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
+      <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
+    </nav>
+  </div>
+  <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
+    <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300">Inicio</a>
+    <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
+    <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
+  </div>
+</header>
 
 <script>
   document.getElementById('menu-toggle').addEventListener('click', function () {
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
   });
+  const currentUrl = window.location.href;
+  document.querySelectorAll('a').forEach(link => {
+    if (link.href === currentUrl) {
+      link.classList.add('active-link');
+    }
+  });
 </script>
 
 <!-- Hero -->
-<!-- INICIO HERO -->
-<!-- INICIO HERO -->
 <section class="relative">
   <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('bosque1');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -171,25 +131,25 @@
       <p class="text-xl text-white mb-8">
         Transformamos espacios con puertas elegantes y cerraduras seguras. Más de 30 años de experiencia en el mercado peruano y más de 15,000 puertas entregadas.
       </p>
-   <a href="https://wa.me/51948660856?text=Hola%2C+quiero+más+información+sobre+sus+productos" 
-   target="_blank" 
-   class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
-  <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
-</a>
-
-
+      <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
+         target="_blank" 
+         class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
+        <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FIN HERO -->
-
-<!-- FIN HERO -->
-
-
 <!-- Nuestros Productos -->
-<!-- Nuestros Productos -->
-<!-- Nuestros Productos -->
+<section id="productos" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestros Productos</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">Explora nuestra línea de puertas y cerraduras de alta calidad para el hogar y negocio.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Productos aquí (omitido por brevedad) -->
+      <!-- Nuestros Productos -->
 <section id="productos" class="py-16 bg-gray-50">
 
 
@@ -233,39 +193,31 @@
   </div>
 </section>
 
+      
+    </div>
+  </div>
+</section>
 
-<!-- Botón de WhatsApp debajo de "Nuestros Productos" -->
 <div class="py-2 text-center bg-gray-50">
-
-<a href="https://wa.me/51948660856?text=Hola%2C+quiero+más+información+sobre+sus+productos" 
-   target="_blank" 
-   class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
-  <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
-</a>
-
-
+  <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
+     target="_blank" 
+     class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
+    <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
+  </a>
 </div>
-  <!-- Botón de WhatsApp debajo de "Nuestros Productos" -->
-<!-- Comentarios -->
-
-<!-- Swiper CSS -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-/>
 
 <!-- Comentarios -->
-<section id="comentarios" class="bg-white py-16">
+<section id="comentarios" class="bg-white py-16 relative">
   <div class="container mx-auto px-4">
     <div class="text-center mb-10">
       <h2 class="text-3xl font-bold text-gray-800">Lo que dicen nuestros clientes</h2>
       <p class="text-gray-600">Reseñas reales de personas que confiaron en nosotros</p>
     </div>
 
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper relative">
       <div class="swiper-wrapper">
-        <!-- Slide (repite este bloque según comentarios) -->
-        <div class="swiper-slide bg-gray-100 rounded-lg shadow text-center px-4 py-6">
+        <!-- Slides (omitidos por brevedad) -->
+          <div class="swiper-slide bg-gray-100 rounded-lg shadow text-center px-4 py-6">
           <p class="text-gray-700 italic">"Excelente trabajo, servicio y puntualidad..."</p>
           <div class="text-yellow-400 text-xl mt-2">★★★★★</div>
           <p class="mt-2 text-sm font-medium text-gray-800">- Dali M.</p>
@@ -319,20 +271,17 @@
       </div>
       </div>
 
-      <!-- Paginación -->
-      <div class="swiper-pagination"></div>
 
-      <!-- Flechas -->
+    
+      </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   const swiper = new Swiper('.mySwiper', {
     loop: true,
@@ -363,97 +312,6 @@
   });
 </script>
 
-<!-- Sección CTA mejorada -->
-
-<section class="bg-gradient-to-r from-[#13262F] to-[#1f3b45] text-white py-16 px-6 text-center">
-  <h2 class="text-4xl font-bold mb-4">¿Buscas transformar tu espacio?</h2>
-  <p class="text-xl mb-8">Contactanos y empecemos a crear algo único juntos.</p>
-<a href="https://wa.me/51948660856?text=Hola%2C+quiero+más+información+sobre+sus+productos" 
-   target="_blank" 
-   class="mt-auto text-sm px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2">
-  <i class="ri-whatsapp-line text-xl"></i> Consultar por WhatsApp
-</a>
-
-</section>
-
-
-<!-- Fin sección CTA mejorada -->
-
-<!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12 mt-12">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div>
-        <h3 class="text-xl font-bold mb-4 border-b border-white pb-2">Información de Contacto</h3>
-        <p class="flex items-start mb-3">
-          <i class="ri-map-pin-line text-white mr-2 mt-1"></i>
-          Av. Tingo María 1338, Breña, Lima, Perú
-        </p>
-        <p class="flex items-start">
-          <i class="ri-phone-line text-white mr-2 mt-1"></i>
-          +51 948 660 856
-        </p>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4 border-b border-white pb-2">Horarios de Atención</h3>
-        <p class="flex items-start mb-1">
-          <i class="ri-time-line text-white mr-2 mt-1"></i>
-          Lunes a Viernes: 7:00 AM - 5:00 PM
-        </p>
-        <p class="flex items-start mb-1">
-          <i class="ri-time-line text-white mr-2 mt-1"></i>
-          Sábados: 7:00 AM - 1:00 PM
-        </p>
-        <p class="flex items-start mb-3">
-          <i class="ri-time-line text-white mr-2 mt-1"></i>
-          Domingos: Cerrado
-        </p>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
-      <p>© 2025 La Casa de las Puertas. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    spaceBetween: 30,
-    breakpoints: {
-      640: { slidesPerView: 1 },
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
-    },
-  });
-
-  function openLightbox(element) {
-    const img = element.querySelector('img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = img.src;
-    lightbox.classList.add('active');
-    event.stopPropagation();
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-  }
-
-  document.getElementById('lightbox').addEventListener('click', function (e) {
-    if (e.target === this) closeLightbox();
-  });
-</script>
 </body>
 </html>
+
