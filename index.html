@@ -163,18 +163,19 @@
 
 
 
+<!-- Sección Nuestros Productos con diseño unificado -->
 <section id="productos" class="py-16 bg-gray-50">
-  <!-- Aquí unificamos los márgenes: -->
   <div class="container mx-auto px-4 sm:px-6 lg:px-16">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestros Productos</h2>
       <p class="text-gray-600 max-w-3xl mx-auto">Explora nuestra línea de puertas y cerraduras de alta calidad para el hogar y negocio.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-      <!-- Tarjeta: Nuestros Beneficios -->
-      <div class="bg-white/60 backdrop-blur p-6 rounded-2xl shadow-xl">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">Nuestros Beneficios</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <!-- Tarjeta de Beneficios -->
+      <div class="col-span-1 bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow-2xl h-fit">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Nuestros Beneficios</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-2">
           <li>Materiales de alta calidad</li>
           <li>Diseños personalizados</li>
@@ -183,31 +184,42 @@
         </ul>
       </div>
 
-      <!-- Tarjeta: Productos en cuadrícula 2x2 -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Tarjetas de Productos -->
+      <div class="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <!-- Producto 1 -->
-        <div class="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white/60 backdrop-blur hover:scale-105 transition">
-          <i class="ri-door-line text-5xl text-primary mb-4"></i>
-          <h4 class="text-lg font-semibold text-gray-800">Puertas de Madera</h4>
-          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=madera" class="mt-2 text-primary underline">Ver más</a>
+        <div class="flex flex-col items-start text-left p-6 rounded-2xl shadow-2xl bg-white/60 backdrop-blur-md">
+          <div class="w-12 h-12 rounded-full bg-[#64774b] flex items-center justify-center text-white text-2xl mb-4">
+            <i class="ri-door-line"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800">Puertas de Madera</h3>
+          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=madera" class="mt-2 text-[#64774b] underline text-sm">Ver más</a>
         </div>
+
         <!-- Producto 2 -->
-        <div class="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white/60 backdrop-blur hover:scale-105 transition">
-          <i class="ri-door-open-line text-5xl text-primary mb-4"></i>
-          <h4 class="text-lg font-semibold text-gray-800">Puertas Contraplacadas</h4>
-          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=contraplacadas" class="mt-2 text-primary underline">Ver más</a>
+        <div class="flex flex-col items-start text-left p-6 rounded-2xl shadow-2xl bg-white/60 backdrop-blur-md">
+          <div class="w-12 h-12 rounded-full bg-[#64774b] flex items-center justify-center text-white text-2xl mb-4">
+            <i class="ri-door-open-line"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800">Puertas Contraplacadas</h3>
+          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=contraplacadas" class="mt-2 text-[#64774b] underline text-sm">Ver más</a>
         </div>
+
         <!-- Producto 3 -->
-        <div class="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white/60 backdrop-blur hover:scale-105 transition">
-          <i class="ri-home-gear-line text-5xl text-primary mb-4"></i>
-          <h4 class="text-lg font-semibold text-gray-800">Portones de Garaje</h4>
-          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=porton" class="mt-2 text-primary underline">Ver más</a>
+        <div class="flex flex-col items-start text-left p-6 rounded-2xl shadow-2xl bg-white/60 backdrop-blur-md">
+          <div class="w-12 h-12 rounded-full bg-[#64774b] flex items-center justify-center text-white text-2xl mb-4">
+            <i class="ri-home-gear-line"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800">Portones de Garaje</h3>
+          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/?filtro=porton" class="mt-2 text-[#64774b] underline text-sm">Ver más</a>
         </div>
+
         <!-- Producto 4 -->
-        <div class="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white/60 backdrop-blur hover:scale-105 transition">
-          <i class="ri-lock-2-line text-5xl text-primary mb-4"></i>
-          <h4 class="text-lg font-semibold text-gray-800">Cerraduras</h4>
-          <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/?filtro=entrada" class="mt-2 text-primary underline">Ver más</a>
+        <div class="flex flex-col items-start text-left p-6 rounded-2xl shadow-2xl bg-white/60 backdrop-blur-md">
+          <div class="w-12 h-12 rounded-full bg-[#64774b] flex items-center justify-center text-white text-2xl mb-4">
+            <i class="ri-lock-2-line"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800">Cerraduras</h3>
+          <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras" class="mt-2 text-[#64774b] underline text-sm">Ver más</a>
         </div>
       </div>
     </div>
