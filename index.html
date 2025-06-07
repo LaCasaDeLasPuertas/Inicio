@@ -77,6 +77,34 @@
   </style>
 </head>
 <body class="bg-white">
+<!-- Header -->
+<header class="z-50 relative bg-gray-100 sm:pt-4">
+  <div class="container mx-auto px-0 sm:px-4 sm:px-6 lg:px-16">
+    <!-- En móvil: sin fondo decorado / En sm+: fondo decorado -->
+    <div class="bg-[#0e0e0e] sm:bg-opacity-95 sm:backdrop-blur sm:shadow-2xl sm:rounded-2xl sm:overflow-hidden">
+      <div class="py-4 px-4 sm:px-6 lg:px-16 flex items-center justify-between">
+        <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
+        <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <nav id="menu" class="hidden sm:flex space-x-6">
+          <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300">Inicio</a>
+          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
+          <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
+        </nav>
+      </div>
+      
+      <!-- Menú móvil -->
+      <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
+        <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300">Inicio</a>
+        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
+        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
+      </div>
+    </div>
+  </div>
+</header>
 
 <!-- HERO DESKTOP (espaciado igual que header) -->
 <section class="bg-gray-100 pt-4 pb-4 hidden sm:block">
