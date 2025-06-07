@@ -187,11 +187,22 @@
 </section>
 
 
-    <!-- Sección de Productos Más Vendidos: Puertas -->
+   <!-- Sección de Productos Más Vendidos: Puertas -->
     <section class="pt-8 pb-4 bg-[#f2f2f2]">
       <div class="container mx-auto px-4 sm:px-6 lg:px-16">
         <h2 class="text-2xl font-bold mb-4 text-[#111]">Puertas Más Vendidas</h2>
         <div class="relative">
+          <!-- Flechas de navegación (solo desktop) -->
+          <button class="hidden lg:flex absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200" id="prev-puertas">
+            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="hidden lg:flex absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200" id="next-puertas">
+            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
           <div class="overflow-hidden" id="carousel-puertas">
             <div class="flex transition-transform duration-500 ease-in-out" id="carousel-inner-puertas">
               <!-- Productos Puertas (7) -->
@@ -269,6 +280,17 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-16">
         <h2 class="text-2xl font-bold mb-4 text-[#111]">Cerraduras Más Vendidas</h2>
         <div class="relative">
+          <!-- Flechas de navegación (solo desktop) -->
+          <button class="hidden lg:flex absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200" id="prev-cerraduras">
+            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="hidden lg:flex absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200" id="next-cerraduras">
+            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
           <div class="overflow-hidden" id="carousel-cerraduras">
             <div class="flex transition-transform duration-500 ease-in-out" id="carousel-inner-cerraduras">
               <!-- Productos Cerraduras (7) -->
@@ -349,6 +371,11 @@
       const itemCount = items.length;
       const itemWidth = 272; // 256px (w-64) + 16px (mr-4)
       let currentIndex = 0;
+      let autoInterval;
+      let isDragging = false;
+      let startX = 0;
+      let currentX = 0;
+      let initialTranslate = 0;
 
       // Clonar elementos para efecto infinito
       items.forEach(item => {
@@ -357,25 +384,141 @@
       });
 
       // Función para mover el carrusel
-      function moveCarousel() {
-        currentIndex++;
+      function moveCarousel(direction = 1) {
+        if (isDragging) return;
+        
+        currentIndex += direction;
         const translateX = -(currentIndex * itemWidth);
         
         inner.style.transition = "transform 0.5s ease-in-out";
         inner.style.transform = `translateX(${translateX}px)`;
 
-        // Resetear cuando llegue al final de los elementos originales
+        // Resetear cuando llegue al final o inicio
         if (currentIndex >= itemCount) {
           setTimeout(() => {
             inner.style.transition = "none";
             inner.style.transform = "translateX(0px)";
             currentIndex = 0;
           }, 500);
+        } else if (currentIndex < 0) {
+          setTimeout(() => {
+            inner.style.transition = "none";
+            const resetPosition = -(itemCount - 1) * itemWidth;
+            inner.style.transform = `translateX(${resetPosition}px)`;
+            currentIndex = itemCount - 1;
+          }, 500);
         }
       }
 
+      // Configurar botones de navegación (solo desktop)
+      const prevBtn = document.getElementById(`prev-${containerId.split('-')[1]}`);
+      const nextBtn = document.getElementById(`next-${containerId.split('-')[1]}`);
+      
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          moveCarousel(-1);
+          resetAutoScroll();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          moveCarousel(1);
+          resetAutoScroll();
+        });
+      }
+
+      // Touch events para móvil
+      inner.addEventListener('touchstart', handleTouchStart, { passive: true });
+      inner.addEventListener('touchmove', handleTouchMove, { passive: false });
+      inner.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+      // Mouse events para desktop (arrastrando)
+      inner.addEventListener('mousedown', handleMouseDown);
+      inner.addEventListener('mousemove', handleMouseMove);
+      inner.addEventListener('mouseup', handleMouseUp);
+      inner.addEventListener('mouseleave', handleMouseUp);
+
+      function handleStart(clientX) {
+        isDragging = true;
+        startX = clientX;
+        currentX = clientX;
+        initialTranslate = -(currentIndex * itemWidth);
+        clearInterval(autoInterval);
+        inner.style.transition = 'none';
+      }
+
+      function handleMove(clientX) {
+        if (!isDragging) return;
+        
+        currentX = clientX;
+        const diffX = currentX - startX;
+        const newTranslate = initialTranslate + diffX;
+        
+        inner.style.transform = `translateX(${newTranslate}px)`;
+      }
+
+      function handleEnd() {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        const diffX = currentX - startX;
+        const threshold = itemWidth / 3;
+
+        if (Math.abs(diffX) > threshold) {
+          if (diffX > 0) {
+            moveCarousel(-1);
+          } else {
+            moveCarousel(1);
+          }
+        } else {
+          // Volver a la posición original
+          const translateX = -(currentIndex * itemWidth);
+          inner.style.transition = "transform 0.3s ease";
+          inner.style.transform = `translateX(${translateX}px)`;
+        }
+        
+        resetAutoScroll();
+      }
+
+      // Touch handlers
+      function handleTouchStart(e) {
+        handleStart(e.touches[0].clientX);
+      }
+
+      function handleTouchMove(e) {
+        e.preventDefault();
+        handleMove(e.touches[0].clientX);
+      }
+
+      function handleTouchEnd() {
+        handleEnd();
+      }
+
+      // Mouse handlers
+      function handleMouseDown(e) {
+        e.preventDefault();
+        handleStart(e.clientX);
+      }
+
+      function handleMouseMove(e) {
+        handleMove(e.clientX);
+      }
+
+      function handleMouseUp() {
+        handleEnd();
+      }
+
+      // Función para reiniciar el auto-scroll
+      function resetAutoScroll() {
+        clearInterval(autoInterval);
+        autoInterval = setInterval(() => moveCarousel(1), 4000);
+      }
+
       // Iniciar el carrusel automático
-      setInterval(moveCarousel, 3000);
+      resetAutoScroll();
+
+      // Pausar auto-scroll cuando el mouse está sobre el carrusel
+      container.addEventListener('mouseenter', () => clearInterval(autoInterval));
+      container.addEventListener('mouseleave', resetAutoScroll);
     }
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -383,7 +526,6 @@
       startInfiniteCarousel("carousel-cerraduras");
     });
     </script>
-
 
  
 
