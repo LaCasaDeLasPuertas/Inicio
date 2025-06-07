@@ -87,7 +87,7 @@
   }
 </style>
 
-<header class="bg-gray-900 shadow-md z-50 relative">
+<header style="background-color: #5a3e2b;" class="shadow-md z-50 relative">
   <div class="container mx-auto px-4 sm:px-6 lg:px-16 py-4 flex items-center justify-between">
     <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
     <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
@@ -113,7 +113,7 @@
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
   });
-  
+
   const currentUrl = window.location.href;
   document.querySelectorAll('a').forEach(link => {
     if (link.href === currentUrl) {
@@ -121,6 +121,7 @@
     }
   });
 </script>
+
 
 <!-- Hero con tarjeta flotante -->
 <section class="bg-gray-100 py-12">
