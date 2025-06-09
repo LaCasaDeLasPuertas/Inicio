@@ -110,10 +110,12 @@
 <!-- HERO DESKTOP -->
 <section class="bg-gray-100 pt-4 pb-4 hidden sm:block">
   <div class="container mx-auto px-4 sm:px-6 lg:px-16">
-    <div class="relative bg-cover bg-center rounded-2xl shadow-2xl overflow-hidden" 
-         style="background-image: url('heero'); min-height: 400px;">
-      <div class="bg-black bg-opacity-30 md:bg-opacity-30 backdrop-blur-sm w-full h-full flex items-center">
-        <div class="max-w-2xl px-8 py-16 text-left animate-fade-in-down">
+    <div class="relative rounded-2xl shadow-2xl overflow-hidden" style="min-height: 400px;">
+      <!-- Imagen como <img> para evitar blur y control total -->
+      <img src="heero" alt="Hero Image" class="w-full h-full object-cover rounded-2xl" style="min-height: 400px;">
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center rounded-2xl px-8 py-16">
+        <div class="max-w-2xl text-left animate-fade-in-down">
           <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
             Transforma tu Hogar con Elegancia y Seguridad
           </h1>
@@ -131,24 +133,29 @@
     </div>
   </div>
 </section>
+
 <!-- HERO MÓVIL -->
 <section class="bg-gray-100 pt-4 pb-4 block sm:hidden">
   <div class="container mx-auto px-4">
     <div class="bg-[#64774b] rounded-2xl shadow-2xl overflow-hidden">
-      <img src="herophone2" alt="Puerta móvil" class="w-full max-h-[500px] object-contain mx-auto">
-      <div class="px-6 py-8 animate-fade-in-up">
-        <h1 class="text-3xl font-bold text-white mb-4">
-          Protege y Embellece tu Hogar con Estilo
-        </h1>
-        <p class="text-base text-white mb-6">
-          Más de 15,000 hogares peruanos ya tienen la puerta que soñaban. ¡Es tu turno!
-        </p>
-        <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
-           target="_blank" 
-           class="text-sm px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2 shadow-md">
-          <i class="ri-whatsapp-line text-xl"></i> ¡Habla con nosotros ahora!
-        </a>
-        <p class="text-sm text-white mt-3 italic">Atención directa por WhatsApp</p>
+      <img src="herophone2" alt="Puerta móvil" class="w-full h-[300px] object-cover rounded-t-2xl">
+      <div class="px-6 py-6 animate-fade-in-up flex flex-col justify-between min-h-[260px]">
+        <div>
+          <h1 class="text-3xl font-bold text-white mb-3">
+            Protege y Embellece tu Hogar con Estilo
+          </h1>
+          <p class="text-base text-white mb-4">
+            Más de 15,000 hogares peruanos ya tienen la puerta que soñaban. ¡Es tu turno!
+          </p>
+        </div>
+        <div>
+          <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
+             target="_blank" 
+             class="text-sm px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2 shadow-md w-full text-center">
+            <i class="ri-whatsapp-line text-xl"></i> ¡Habla con nosotros ahora!
+          </a>
+          <p class="text-sm text-white mt-2 italic text-center">Atención directa por WhatsApp</p>
+        </div>
       </div>
     </div>
   </div>
