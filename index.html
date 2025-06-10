@@ -157,12 +157,12 @@
 <!-- Cotizador mejorado -->
 <section class="max-w-5xl mx-auto mt-8 px-4">
   <div class="bg-white p-6 rounded-2xl shadow-lg">
-    <h2 class="text-2xl font-bold mb-4">Cotiza tu Puerta Aquí</h2>
+    <h2 class="text-2xl font-bold mb-4 text-primary">Cotiza tu Puerta Aquí</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <!-- Tipo de puerta -->
       <div>
-        <label for="tipoPuerta" class="block text-sm font-medium">Tipo de puerta</label>
+        <label for="tipoPuerta" class="block text-sm font-medium text-gray-700">Tipo de puerta</label>
         <select id="tipoPuerta" class="w-full mt-1 p-2 border rounded-lg">
           <option value="">Selecciona</option>
           <option value="madera">De Madera (entrada)</option>
@@ -173,7 +173,7 @@
 
       <!-- Tipo de madera (solo si aplica) -->
       <div>
-        <label for="tipoMadera" class="block text-sm font-medium">Tipo de madera</label>
+        <label for="tipoMadera" class="block text-sm font-medium text-gray-700">Tipo de madera</label>
         <select id="tipoMadera" class="w-full mt-1 p-2 border rounded-lg" disabled>
           <option value="">Selecciona</option>
         </select>
@@ -182,11 +182,11 @@
       <!-- Medidas -->
       <div class="flex space-x-2">
         <div class="w-1/2">
-          <label for="ancho" class="block text-sm font-medium">Ancho (m)</label>
+          <label for="ancho" class="block text-sm font-medium text-gray-700">Ancho (m)</label>
           <input type="number" step="0.01" id="ancho" class="w-full mt-1 p-2 border rounded-lg" placeholder="Ej: 0.90">
         </div>
         <div class="w-1/2">
-          <label for="alto" class="block text-sm font-medium">Alto (m)</label>
+          <label for="alto" class="block text-sm font-medium text-gray-700">Alto (m)</label>
           <input type="number" step="0.01" id="alto" class="w-full mt-1 p-2 border rounded-lg" placeholder="Ej: 2.10">
         </div>
       </div>
@@ -194,11 +194,11 @@
 
     <!-- Opciones adicionales -->
     <div class="mt-4 flex items-center space-x-4">
-      <label class="flex items-center">
+      <label class="flex items-center text-sm">
         <input type="checkbox" id="pintado" class="mr-2">
         ¿Pintado blanco?
       </label>
-      <label class="flex items-center">
+      <label class="flex items-center text-sm">
         <input type="checkbox" id="instalacion" class="mr-2">
         ¿Incluir instalación?
       </label>
@@ -211,7 +211,7 @@
 
     <!-- Resultado -->
     <div id="resultado" class="mt-4 hidden bg-gray-100 p-4 rounded-xl">
-      <h3 class="text-lg font-semibold">Precio estimado:</h3>
+      <h3 class="text-lg font-semibold text-gray-800">Precio estimado:</h3>
       <p id="precio" class="text-xl font-bold text-green-700"></p>
     </div>
   </div>
@@ -248,12 +248,12 @@ const preciosBase = {
   porton_cachimbo: 1900,
 };
 
-// Actualiza las opciones según el tipo
 function actualizarMaderas() {
   const tipo = tipoPuerta.value;
-  tipoMadera.innerHTML = "";
+  tipoMadera.innerHTML = '<option value="">Selecciona</option>';
   tipoMadera.disabled = opcionesMadera[tipo].length === 0;
   if (tipo === "contraplacada") return;
+
   opcionesMadera[tipo].forEach((op) => {
     const opt = document.createElement("option");
     opt.value = op.value;
@@ -264,7 +264,6 @@ function actualizarMaderas() {
 
 tipoPuerta.addEventListener("change", actualizarMaderas);
 
-// Calcular
 calcularBtn.addEventListener("click", () => {
   const tipo = tipoPuerta.value;
   const madera = tipo === "contraplacada" ? "contraplacada_interior" : tipoMadera.value;
@@ -280,7 +279,6 @@ calcularBtn.addEventListener("click", () => {
 
   let precio = preciosBase[madera];
 
-  // Límites
   const maxPuerta = { a: 1.0, h: 2.4 };
   const maxGaraje = 2.45;
   const esPorton = madera.startsWith("porton_");
@@ -296,12 +294,11 @@ calcularBtn.addEventListener("click", () => {
       alert("Altura máxima para portones: 2.45m");
       return;
     }
-    precio *= ancho; // metro lineal
+    precio *= ancho; // precio por metro lineal
   }
 
-  // Extras
   if (pintado) precio += (tipo === "contraplacada" ? 100 : 150);
-  if (!instalacion) precio -= 0; // No cambia, solo informativo
+  // instalación es informativa
 
   document.getElementById("precio").textContent = `S/ ${precio.toFixed(2)}`;
   document.getElementById("resultado").classList.remove("hidden");
