@@ -154,6 +154,172 @@
   </div>
 </section>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador de Puertas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #1f1f1f;
+    }
+    .hero {
+      background: url('herophone2') center/cover no-repeat;
+      padding: 4rem 2rem;
+      color: white;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+    }
+    .cotizador {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .cotizador h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #27c53f;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .resultado {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #1a5e20;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Protege y Embellece tu Hogar con Estilo</h1>
+    <p>Más de 15,000 hogares peruanos ya tienen la puerta que soñaban. ¡Es tu turno!</p>
+  </section>
+
+  <!-- Cotizador -->
+  <div class="cotizador">
+    <h2>Calcula el precio de tu puerta</h2>
+
+    <div class="form-group">
+      <label for="tipoPuerta">Tipo de puerta</label>
+      <select id="tipoPuerta">
+        <option value="entrada">Entrada (madera maciza)</option>
+        <option value="interior">Interior (contraplacada)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="tipoMadera">Tipo de madera</label>
+      <select id="tipoMadera">
+        <option value="cachimbo">Cachimbo</option>
+        <option value="mohena">Mohena</option>
+        <option value="cedro">Caoba o Cedro</option>
+        <option value="reforzada">Contraplacada reforzada</option>
+        <option value="triplay">Triplay enchapado en cedro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="medidas">Medidas (Ancho x Alto en metros)</label>
+      <input type="text" id="medidas" placeholder="Ejemplo: 0.9x2.1">
+    </div>
+
+    <div class="form-group">
+      <label for="pintado">¿Deseas la puerta pintada?</label>
+      <select id="pintado">
+        <option value="no">No</option>
+        <option value="si">Sí</option>
+      </select>
+    </div>
+
+    <button onclick="calcularPrecio()">Calcular precio</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularPrecio() {
+      const tipoPuerta = document.getElementById('tipoPuerta').value;
+      const tipoMadera = document.getElementById('tipoMadera').value;
+      const medidas = document.getElementById('medidas').value;
+      const pintado = document.getElementById('pintado').value;
+
+      let base = 0;
+
+      if (tipoPuerta === 'entrada') {
+        if (tipoMadera === 'cachimbo') base = 2600;
+        else if (tipoMadera === 'mohena') base = 2700;
+        else if (tipoMadera === 'cedro') base = 3300;
+        else if (tipoMadera === 'reforzada') base = 1500;
+      } else if (tipoPuerta === 'interior') {
+        if (tipoMadera === 'triplay') base = 690;
+      }
+
+      // Medidas máximas 1x2.4m
+      let extra = 0;
+      try {
+        const [ancho, alto] = medidas.split('x').map(parseFloat);
+        if (ancho > 1 || alto > 2.4) {
+          const areaBase = 1 * 2.4;
+          const areaReal = ancho * alto;
+          extra = (areaReal / areaBase - 1) * base;
+        }
+      } catch(e) {
+        alert("Por favor, ingresa las medidas en formato correcto (ej. 0.9x2.1)");
+        return;
+      }
+
+      if (pintado === 'si') {
+        if (tipoPuerta === 'entrada') base += 150;
+        else if (tipoPuerta === 'interior') base += 100;
+      }
+
+      const total = base + (extra > 0 ? extra : 0);
+      const resultado = document.getElementById('resultado');
+      resultado.textContent = `Precio estimado: S/ ${total.toFixed(2)}. ¡Escríbenos para confirmar tu pedido!`;
+    }
+  </script>
 
 
   
