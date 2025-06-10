@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cotizador de Puertas | Calcula tu Precio al Instante</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
@@ -13,24 +13,29 @@
       padding: 0;
       color: #1f1f1f;
     }
+
     .hero {
-      background: url('herophone2') center/cover no-repeat;
+      background: url('herophone2.png') center/cover no-repeat;
       padding: 4rem 2rem;
       color: white;
       text-align: center;
     }
+
     .hero h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
+
     .hero p {
       font-size: 1.1rem;
     }
+
     .cotizador-wrapper {
       max-width: 1100px;
       margin: 3rem auto;
       padding: 0 1rem;
     }
+
     .cotizador-title {
       text-align: center;
       font-size: 2rem;
@@ -38,26 +43,31 @@
       font-weight: 800;
       color: #1a1a1a;
     }
+
     .cotizador {
       background: white;
       padding: 2rem;
       border-radius: 16px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     }
+
     .cotizador h2 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       color: #333;
       text-align: center;
     }
+
     .form-group {
       margin-bottom: 1rem;
     }
+
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 600;
     }
+
     select, input[type="text"] {
       width: 100%;
       padding: 0.6rem;
@@ -65,6 +75,7 @@
       border-radius: 8px;
       font-size: 1rem;
     }
+
     button {
       background-color: #27c53f;
       color: white;
@@ -76,6 +87,7 @@
       margin-top: 1rem;
       width: 100%;
     }
+
     .resultado {
       margin-top: 1.5rem;
       font-size: 1.2rem;
@@ -83,186 +95,153 @@
       color: #1a5e20;
       text-align: center;
     }
+
+    img.hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
   </style>
 </head>
-<body class="bg-white">
+<body>
 
 <!-- Header -->
-<header class="z-50 relative bg-gray-100 sm:pt-4">
-  <div class="container mx-auto px-0 sm:px-4 sm:px-6 lg:px-16">
-    <!-- Fondo del header actualizado a #1a1a1a -->
-    <div class="bg-[#1a1a1a] sm:bg-opacity-95 sm:backdrop-blur sm:shadow-2xl sm:rounded-2xl sm:overflow-hidden">
-      <div class="py-4 px-4 sm:px-6 lg:px-16 flex items-center justify-between">
-        <a href="#" class="text-lg font-bold text-white">La Casa de las Puertas</a>
-        <button id="menu-toggle" class="text-white sm:hidden focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <nav id="menu" class="hidden sm:flex space-x-6">
-          <a href="https://lacasadelaspuertas.github.io/Inicio/" class="text-white hover:text-gray-300">Inicio</a>
-          <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="text-white hover:text-gray-300">Puertas</a>
-          <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="text-white hover:text-gray-300">Cerraduras</a>
-        </nav>
-      </div>
-      
-      <!-- Menú móvil -->
-      <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
-        <a href="https://lacasadelaspuertas.github.io/Inicio/" class="block text-white py-2 hover:text-gray-300">Inicio</a>
-        <a href="https://lacasadelaspuertas.github.io/galeria-de-trabajos/" class="block text-white py-2 hover:text-gray-300">Puertas</a>
-        <a href="https://lacasadelaspuertas.github.io/tienda-cerraduras/" class="block text-white py-2 hover:text-gray-300">Cerraduras</a>
-      </div>
-    </div>
+<header style="background: #1a1a1a; padding: 1rem;">
+  <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
+    <a href="#" style="color: white; font-weight: bold; font-size: 1.2rem;">La Casa de las Puertas</a>
+    <nav style="display: flex; gap: 1rem;">
+      <a href="/Inicio/" style="color: white;">Inicio</a>
+      <a href="/galeria-de-trabajos/" style="color: white;">Puertas</a>
+      <a href="/tienda-cerraduras/" style="color: white;">Cerraduras</a>
+    </nav>
   </div>
 </header>
 
 <!-- HERO DESKTOP -->
-<section class="bg-gray-100 pt-4 pb-4 hidden sm:block">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-16">
-    <div class="relative rounded-2xl shadow-2xl overflow-hidden" style="min-height: 400px;">
-      <!-- Imagen como <img> para evitar blur y control total -->
-      <img src="heero" alt="Hero Image" class="w-full h-full object-cover rounded-2xl" style="min-height: 400px;">
-      <!-- Overlay -->
-      <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center rounded-2xl px-8 py-16">
-        <div class="max-w-2xl text-left animate-fade-in-down">
-          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            Transforma tu Hogar con Elegancia y Seguridad
-          </h1>
-          <p class="text-xl text-white mb-8">
-            Más de 30 años ayudando a familias peruanas a proteger y embellecer sus espacios. 15,000 hogares ya confiaron en nosotros. ¿Y tú?
-          </p>
-          <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
-             target="_blank" 
-             class="text-sm px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2 shadow-lg">
-            <i class="ri-whatsapp-line text-xl"></i> ¡Cotiza sin compromiso!
-          </a>
-          <p class="text-sm text-white mt-3 italic">Atención rápida y personalizada</p>
-        </div>
+<section style="background: #eee; padding: 2rem 1rem; display: none;" class="hero-desktop">
+  <div style="max-width: 1200px; margin: auto; position: relative; overflow: hidden; border-radius: 1rem;">
+    <img src="heero" alt="Hero Image" class="hero-img" style="min-height: 400px;">
+    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; padding: 2rem;">
+      <div style="color: white; max-width: 600px;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Transforma tu Hogar con Elegancia y Seguridad</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Más de 30 años ayudando a familias peruanas. ¿Y tú?</p>
+        <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos"
+           style="background: #25D366; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none;">
+          ¡Cotiza sin compromiso!
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HERO MÓVIL SIN TARJETA -->
-<section class="relative block sm:hidden h-[450px]">
-  <div class="absolute inset-0 bg-cover bg-center rounded-b-2xl" style="background-image: url('herophone2'); filter: none;">
-  </div>
-  <div class="absolute inset-0 bg-black bg-opacity-40 rounded-b-2xl flex flex-col justify-center px-6 py-8 text-white">
-    <h1 class="text-3xl font-bold mb-4 drop-shadow-md">
-      Protege y Embellece tu Hogar con Estilo
-    </h1>
-    <p class="text-base mb-6 drop-shadow-md">
-      Más de 15,000 hogares peruanos ya tienen la puerta que soñaban. ¡Es tu turno!
-    </p>
-    <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
-       target="_blank" 
-       class="text-sm px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700 transition transform hover:scale-105 inline-flex items-center gap-2 shadow-lg max-w-max">
-      <i class="ri-whatsapp-line text-xl"></i> ¡Habla con nosotros ahora!
-    </a>
-    <p class="italic mt-3 text-sm drop-shadow-md">Atención directa por WhatsApp</p>
-  </div>
+<!-- HERO MÓVIL -->
+<section class="hero">
+  <h1>Protege y Embellece tu Hogar con Estilo</h1>
+  <p>Más de 15,000 hogares peruanos ya tienen la puerta que soñaban. ¡Es tu turno!</p>
+  <a href="https://wa.me/51948660856?text=Hola%2C+quiero+m%C3%A1s+informaci%C3%B3n+sobre+sus+productos" 
+     style="display: inline-block; margin-top: 1rem; background: #25D366; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none;">
+    ¡Habla con nosotros ahora!
+  </a>
 </section>
 
 <!-- Cotizador -->
-  <div class="cotizador-wrapper">
-    <h2 class="cotizador-title">Cotiza tu puerta al instante</h2>
-    <div class="cotizador">
-      <h2>Calcula el precio de tu puerta</h2>
+<div class="cotizador-wrapper">
+  <h2 class="cotizador-title">Cotiza tu puerta al instante</h2>
+  <div class="cotizador">
+    <h2>Calcula el precio de tu puerta</h2>
 
-      <div class="form-group">
-        <label for="tipoPuerta">Tipo de puerta</label>
-        <select id="tipoPuerta">
-          <option disabled selected>Selecciona una opción</option>
-          <option value="entrada">Entrada (madera maciza)</option>
-          <option value="interior">Interior (contraplacada)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="tipoMadera">Tipo de madera</label>
-        <select id="tipoMadera">
-          <option disabled selected>Selecciona una opción</option>
-          <option value="cachimbo">Cachimbo</option>
-          <option value="mohena">Mohena</option>
-          <option value="cedro">Caoba o Cedro</option>
-          <option value="reforzada">Contraplacada reforzada</option>
-          <option value="triplay">Triplay enchapado en cedro</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="medidas">Medidas (Ancho x Alto en metros)</label>
-        <input type="text" id="medidas" placeholder="Ejemplo: 0.9x2.1">
-      </div>
-
-      <div class="form-group">
-        <label for="pintado">¿Deseas la puerta pintada?</label>
-        <select id="pintado">
-          <option disabled selected>Selecciona una opción</option>
-          <option value="no">No</option>
-          <option value="si">Sí</option>
-        </select>
-      </div>
-
-      <button onclick="calcularPrecio()">Calcular precio</button>
-      <div class="resultado" id="resultado"></div>
+    <div class="form-group">
+      <label for="tipoPuerta">Tipo de puerta</label>
+      <select id="tipoPuerta">
+        <option disabled selected>Selecciona una opción</option>
+        <option value="entrada">Entrada (madera maciza)</option>
+        <option value="interior">Interior (contraplacada)</option>
+      </select>
     </div>
+
+    <div class="form-group">
+      <label for="tipoMadera">Tipo de madera</label>
+      <select id="tipoMadera">
+        <option disabled selected>Selecciona una opción</option>
+        <option value="cachimbo">Cachimbo</option>
+        <option value="mohena">Mohena</option>
+        <option value="cedro">Caoba o Cedro</option>
+        <option value="reforzada">Contraplacada reforzada</option>
+        <option value="triplay">Triplay enchapado en cedro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="medidas">Medidas (Ancho x Alto en metros)</label>
+      <input type="text" id="medidas" placeholder="Ejemplo: 0.9x2.1">
+    </div>
+
+    <div class="form-group">
+      <label for="pintado">¿Deseas la puerta pintada?</label>
+      <select id="pintado">
+        <option disabled selected>Selecciona una opción</option>
+        <option value="no">No</option>
+        <option value="si">Sí</option>
+      </select>
+    </div>
+
+    <button onclick="calcularPrecio()">Calcular precio</button>
+    <div class="resultado" id="resultado"></div>
   </div>
+</div>
 
-  <script>
-    function calcularPrecio() {
-      const tipoPuerta = document.getElementById('tipoPuerta').value;
-      const tipoMadera = document.getElementById('tipoMadera').value;
-      const medidas = document.getElementById('medidas').value;
-      const pintado = document.getElementById('pintado').value;
+<script>
+  function calcularPrecio() {
+    const tipoPuerta = document.getElementById('tipoPuerta').value;
+    const tipoMadera = document.getElementById('tipoMadera').value;
+    const medidas = document.getElementById('medidas').value;
+    const pintado = document.getElementById('pintado').value;
 
-      if (!tipoPuerta || !tipoMadera || !medidas || !pintado || tipoPuerta === 'Selecciona una opción' || tipoMadera === 'Selecciona una opción' || pintado === 'Selecciona una opción') {
-        alert('Por favor completa todos los campos.');
-        return;
-      }
-
-      let base = 0;
-
-      if (tipoPuerta === 'entrada') {
-        if (tipoMadera === 'cachimbo') base = 2600;
-        else if (tipoMadera === 'mohena') base = 2700;
-        else if (tipoMadera === 'cedro') base = 3300;
-        else if (tipoMadera === 'reforzada') base = 1500;
-      } else if (tipoPuerta === 'interior') {
-        if (tipoMadera === 'triplay') base = 690;
-        else {
-          alert('La combinación de interior con ese tipo de madera no es válida.');
-          return;
-        }
-      }
-
-      let extra = 0;
-      try {
-        const [ancho, alto] = medidas.toLowerCase().split('x').map(n => parseFloat(n.trim()));
-        if (isNaN(ancho) || isNaN(alto) || ancho <= 0 || alto <= 0) throw new Error();
-        if (ancho > 1 || alto > 2.4) {
-          const areaBase = 1 * 2.4;
-          const areaReal = ancho * alto;
-          extra = (areaReal / areaBase - 1) * base;
-        }
-      } catch(e) {
-        alert("Por favor, ingresa las medidas en formato correcto (ej. 0.9x2.1)");
-        return;
-      }
-
-      if (pintado === 'si') {
-        if (tipoPuerta === 'entrada') base += 150;
-        else if (tipoPuerta === 'interior') base += 100;
-      }
-
-      const total = base + (extra > 0 ? extra : 0);
-      const resultado = document.getElementById('resultado');
-      resultado.textContent = `Precio estimado: S/ ${total.toFixed(2)}. ¡Escríbenos para confirmar tu pedido!`;
+    if (!tipoPuerta || !tipoMadera || !medidas || !pintado || tipoPuerta.includes('Selecciona')) {
+      alert('Por favor completa todos los campos.');
+      return;
     }
-  </script>
 
+    let base = 0;
 
-  
+    if (tipoPuerta === 'entrada') {
+      if (tipoMadera === 'cachimbo') base = 2600;
+      else if (tipoMadera === 'mohena') base = 2700;
+      else if (tipoMadera === 'cedro') base = 3300;
+      else if (tipoMadera === 'reforzada') base = 1500;
+    } else if (tipoPuerta === 'interior') {
+      if (tipoMadera === 'triplay') base = 690;
+      else {
+        alert('La combinación de interior con ese tipo de madera no es válida.');
+        return;
+      }
+    }
+
+    let extra = 0;
+    try {
+      const [ancho, alto] = medidas.toLowerCase().split('x').map(n => parseFloat(n.trim()));
+      if (isNaN(ancho) || isNaN(alto) || ancho <= 0 || alto <= 0) throw new Error();
+      if (ancho > 1 || alto > 2.4) {
+        const areaBase = 1 * 2.4;
+        const areaReal = ancho * alto;
+        extra = (areaReal / areaBase - 1) * base;
+      }
+    } catch(e) {
+      alert("Por favor, ingresa las medidas en formato correcto (ej. 0.9x2.1)");
+      return;
+    }
+
+    if (pintado === 'si') {
+      base += tipoPuerta === 'entrada' ? 150 : 100;
+    }
+
+    const total = base + Math.max(extra, 0);
+    const resultado = document.getElementById('resultado');
+    resultado.textContent = `Precio estimado: S/ ${total.toFixed(2)}. ¡Escríbenos para confirmar tu pedido!`;
+  }
+</script>
+
 <!-- BENEFICIOS -->
 <section class="bg-gray-100 pt-4 pb-4">
   <div class="container mx-auto px-4 sm:px-6 lg:px-16">
