@@ -154,10 +154,10 @@
   </div>
 </section>
 
-<!-- Sección de Cotizador como tarjeta sobre fondo -->
-<section class="w-full bg-[#f4f4f4] py-14 px-4">
-  <div class="max-w-7xl mx-auto bg-[#2c3b2f] rounded-2xl shadow-xl px-8 py-10">
-    <div class="bg-white rounded-2xl shadow-lg px-6 py-8">
+<!-- Sección Cotizador con fondo imagen -->
+<section class="w-full py-14 px-4 bg-cover bg-center bg-no-repeat" style="background-image: url('/ruta/a/f_cotizador.jpg');">
+  <div class="max-w-7xl mx-auto rounded-2xl shadow-xl overflow-hidden">
+    <div class="bg-white bg-opacity-95 backdrop-blur-md rounded-2xl shadow-lg px-6 py-8">
       <h2 class="text-2xl md:text-3xl font-bold mb-6 text-[#2c3b2f]">Cotiza tu Puerta Aquí</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -210,9 +210,9 @@
         <button id="calcular" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition w-full md:w-auto">
           Calcular
         </button>
-        <button id="whatsapp" class="bg-[#25D366] text-white px-6 py-2 rounded-lg hover:bg-[#1ebd5d] transition w-full md:w-auto hidden">
+        <a id="whatsapp" class="bg-[#25D366] text-white px-6 py-2 rounded-lg hover:bg-[#1ebd5d] transition w-full md:w-auto hidden" target="_blank">
           Enviar por WhatsApp
-        </button>
+        </a>
       </div>
 
       <!-- Resultado -->
@@ -223,104 +223,6 @@
     </div>
   </div>
 </section>
-
-<script>
-const tipoPuerta = document.getElementById("tipoPuerta");
-const tipoMadera = document.getElementById("tipoMadera");
-const calcularBtn = document.getElementById("calcular");
-const whatsappBtn = document.getElementById("whatsapp");
-
-const opcionesMadera = {
-  madera: [
-    { label: "Cachimbo", value: "cachimbo" },
-    { label: "Mohena", value: "mohena" },
-    { label: "Caoba o Cedro", value: "caoba_cedro" },
-    { label: "Contraplacada Reforzada", value: "contraplacada_entrada" },
-  ],
-  garaje: [
-    { label: "Cedro", value: "porton_cedro" },
-    { label: "Tornillo", value: "porton_tornillo" },
-    { label: "Cachimbo", value: "porton_cachimbo" },
-  ],
-  contraplacada: [],
-};
-
-const preciosBase = {
-  cachimbo: 2600,
-  mohena: 2700,
-  caoba_cedro: 3300,
-  contraplacada_entrada: 1500,
-  contraplacada_interior: 690,
-  porton_cedro: 2500,
-  porton_tornillo: 2000,
-  porton_cachimbo: 1900,
-};
-
-function actualizarMaderas() {
-  const tipo = tipoPuerta.value;
-  tipoMadera.innerHTML = '<option value="">Selecciona</option>';
-  tipoMadera.disabled = opcionesMadera[tipo].length === 0;
-  if (tipo === "contraplacada") return;
-
-  opcionesMadera[tipo].forEach((op) => {
-    const opt = document.createElement("option");
-    opt.value = op.value;
-    opt.textContent = op.label;
-    tipoMadera.appendChild(opt);
-  });
-}
-
-tipoPuerta.addEventListener("change", actualizarMaderas);
-
-calcularBtn.addEventListener("click", () => {
-  const tipo = tipoPuerta.value;
-  const madera = tipo === "contraplacada" ? "contraplacada_interior" : tipoMadera.value;
-  const ancho = parseFloat(document.getElementById("ancho").value);
-  const alto = parseFloat(document.getElementById("alto").value);
-  const pintado = document.getElementById("pintado").checked;
-  const instalacion = document.getElementById("instalacion").checked;
-
-  if (!tipo || (!madera && tipo !== "contraplacada") || !ancho || !alto) {
-    alert("Completa todos los campos.");
-    return;
-  }
-
-  let precio = preciosBase[madera];
-
-  const maxPuerta = { a: 1.0, h: 2.4 };
-  const maxGaraje = 2.45;
-  const esPorton = madera.startsWith("porton_");
-
-  if (tipo === "madera" || tipo === "contraplacada") {
-    if (ancho > maxPuerta.a || alto > maxPuerta.h) {
-      const areaMax = maxPuerta.a * maxPuerta.h;
-      const areaActual = ancho * alto;
-      precio *= (areaActual / areaMax);
-    }
-  } else if (esPorton) {
-    if (alto > maxGaraje) {
-      alert("Altura máxima para portones: 2.45m");
-      return;
-    }
-    precio *= ancho;
-  }
-
-  if (pintado) precio += (tipo === "contraplacada" ? 100 : 150);
-
-  const total = precio.toFixed(2);
-  document.getElementById("precio").textContent = `S/ ${total}`;
-  document.getElementById("resultado").classList.remove("hidden");
-  whatsappBtn.classList.remove("hidden");
-
-  // WhatsApp link
-  const tipoLabel = tipoPuerta.options[tipoPuerta.selectedIndex].text;
-  const maderaLabel = tipo === "contraplacada" ? "Contraplacada Interior" :
-                      tipoMadera.options[tipoMadera.selectedIndex]?.text || "";
-  const mensaje = `Hola, quiero una cotización:\n\nTipo: ${tipoLabel}\nMadera: ${maderaLabel}\nMedidas: ${ancho}m x ${alto}m\n${pintado ? "Pintado blanco\n" : ""}${instalacion ? "Con instalación\n" : ""}Precio estimado: S/ ${total}`;
-  whatsappBtn.href = `https://wa.me/51999999999?text=${encodeURIComponent(mensaje)}`;
-  whatsappBtn.target = "_blank";
-});
-</script>
 
   
 <!-- BENEFICIOS -->
