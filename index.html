@@ -231,7 +231,6 @@
 
 
 
-<!-- Script funcionalidad -->
 <script>
   const tipoPuerta = document.getElementById("tipoPuerta");
   const tipoMadera = document.getElementById("tipoMadera");
@@ -245,9 +244,9 @@
   const whatsappBtn = document.getElementById("whatsapp");
 
   const opcionesMadera = {
-    madera: ["Cedro", "Tornillo", "Nogal"],
-    contraplacada: ["Pino", "Ishpingo", "Sapelly"],
-    garaje: ["Cedro", "Tornillo"]
+    madera: ["Cachimbo", "Mohena", "Caoba o Cedro"],
+    contraplacada: ["Reforzada", "Triplay enchapado en Cedro"],
+    garaje: ["Cedro", "Tornillo", "Cachimbo"]
   };
 
   tipoPuerta.addEventListener("change", () => {
@@ -277,13 +276,35 @@
       return;
     }
 
-    let base = 500;
-    if (tipo === "madera") base = 800;
-    if (tipo === "garaje") base = 1200;
+    let precioBase = 0;
+    const area = a * h;
+    const maxArea = 1 * 2.4;
+    let multiplicador = area > maxArea ? area / maxArea : 1;
 
-    let precioTotal = base * a * h;
-    if (pintado.checked) precioTotal += 100;
-    if (instalacion.checked) precioTotal += 150;
+    // Lógica de precios
+    if (tipo === "madera") {
+      if (madera === "Cachimbo") precioBase = 2600;
+      else if (madera === "Mohena") precioBase = 2700;
+      else if (madera === "Caoba o Cedro") precioBase = 3300;
+    } else if (tipo === "contraplacada") {
+      if (madera === "Reforzada") precioBase = 1500;
+      else if (madera === "Triplay enchapado en Cedro") precioBase = 690;
+    } else if (tipo === "garaje") {
+      if (madera === "Cedro") precioBase = 2500 * a;
+      else if (madera === "Tornillo") precioBase = 2000 * a;
+      else if (madera === "Cachimbo") precioBase = 1900 * a;
+    }
+
+    let precioTotal = precioBase * multiplicador;
+
+    // Pintado
+    if (pintado.checked) {
+      if (tipo === "madera") precioTotal += 150;
+      else if (tipo === "contraplacada") precioTotal += 100;
+    }
+
+    // Instalación solo si no está incluida ya
+    if (tipo === "garaje" && instalacion.checked) precioTotal += 150; // opcional en portones
 
     const precioFinal = Math.round(precioTotal);
     precio.textContent = `S/ ${precioFinal}`;
@@ -294,6 +315,7 @@
     whatsappBtn.classList.remove("hidden");
   });
 </script>
+
 
 
 
